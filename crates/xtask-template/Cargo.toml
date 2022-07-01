@@ -1,0 +1,8 @@
+[package]
+name = "xtask-template"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[dependencies]
+xtask-prelude = { git = "https://github.com/MozkTaberenai/xtask-prelude.git" }
