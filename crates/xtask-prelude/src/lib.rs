@@ -12,6 +12,13 @@ pub mod fs;
 mod router;
 pub use router::TaskRouter;
 
+mod logger;
+use logger::Logger;
+
+pub fn init_logger() {
+    Logger::init();
+}
+
 pub fn command<S, I>(program: S, args: I) -> Command
 where
     S: AsRef<OsStr>,
@@ -43,11 +50,4 @@ pub fn exit(code: i32) -> ! {
         _ => error!("exit(code: {})", code),
     }
     std::process::exit(code);
-}
-
-pub fn init_logger() {
-    if std::env::var("RUST_LOG").is_err() {
-        std::env::set_var("RUST_LOG", "info");
-    }
-    env_logger::builder().format_timestamp(None).init();
 }
