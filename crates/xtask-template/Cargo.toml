@@ -5,4 +5,4 @@ publish = false
 edition = "2021"
 
 [dependencies]
-xtask-prelude = { git = "https://github.com/MozkTaberenai/xtask-prelude.git" }
+xtask-prelude = { git = "https://github.com/MozkTaberenai/xtask-prelude" }
