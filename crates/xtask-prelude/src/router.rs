@@ -29,19 +29,24 @@ impl TaskRouter {
     }
 
     pub fn run_with_args(self, mut args: Args) {
-        let task = match args.next().as_deref() {
-            Some(task_name) => match self.tasks.iter().find(|(name, _)| name == task_name) {
-                None => {
-                    error!("task not found: {task_name:?}");
-                    exit(1);
+        let (task_name, task) = match args.next().as_deref() {
+            Some(task_name) => {
+                let task_name_normalized = task_name.to_ascii_lowercase().replace("-", "_");
+                match self.tasks.iter().find(|(name, _)| {
+                    name.to_ascii_lowercase().replace("-", "_") == task_name_normalized
+                }) {
+                    None => {
+                        error!("Task: {task_name:?} not found");
+                        exit(1);
+                    }
+                    Some((task_name, task)) => {
+                        info!("Executing task: {task_name:?}");
+                        (task_name, task)
+                    }
                 }
-                Some((name, task)) => {
-                    info!("execute task: {name:?}");
-                    task
-                }
-            },
+            }
             None => {
-                info!("available tasks:");
+                info!("Available tasks:");
                 for task_name in self.tasks.iter().map(|item| item.0.as_str()) {
                     println!("{task_name}");
                 }
@@ -50,7 +55,7 @@ impl TaskRouter {
         };
 
         if let Err(err) = task(args) {
-            error!("Error: {err:?}");
+            error!("Task: {task_name:?} returned error: {err:?}");
             exit(1);
         }
     }
