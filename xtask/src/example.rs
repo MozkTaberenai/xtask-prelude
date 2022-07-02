@@ -11,7 +11,7 @@ pub fn b(args: Args) -> Result<()> {
 }
 
 pub fn c(args: Args) -> Result<()> {
-    info!("{args:?}");
+    error!("{args:?}");
     Ok(())
 }
 
