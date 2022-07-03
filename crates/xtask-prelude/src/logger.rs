@@ -16,8 +16,8 @@ impl Logger {
 }
 
 impl Log for Logger {
-    fn enabled(&self, metadata: &log::Metadata) -> bool {
-        metadata.level() <= Level::Info
+    fn enabled(&self, _metadata: &log::Metadata) -> bool {
+        true
     }
 
     fn log(&self, record: &log::Record) {
