@@ -1,6 +1,6 @@
 pub use std::env::Args;
 use std::ffi::OsStr;
-use std::path::{Path, PathBuf};
+pub use std::path::{Path, PathBuf};
 use std::process::Command;
 
 pub use anyhow::{self, bail, ensure, Result};
