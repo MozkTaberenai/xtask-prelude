@@ -47,7 +47,7 @@ impl Log for Logger {
             let mut target_color = ColorSpec::new();
             target_color.set_dimmed(true);
             buffer.set_color(&target_color).expect("Fail to set_color");
-            write!(&mut buffer, "{}", record.target()).expect("Fail to write");
+            write!(&mut buffer, "{}:", record.target()).expect("Fail to write");
 
             buffer.set_color(&no_color).expect("Fail to set_color");
             write!(&mut buffer, " ").expect("Fail to write");
