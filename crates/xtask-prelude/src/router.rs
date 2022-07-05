@@ -36,17 +36,17 @@ impl TaskRouter {
                     name.to_ascii_lowercase().replace("-", "_") == task_name_normalized
                 }) {
                     None => {
-                        error!("Task: {task_name:?} not found");
+                        error!("task: {task_name:?} not found");
                         exit(1);
                     }
                     Some((task_name, task)) => {
-                        info!("Executing task: {task_name:?}");
+                        info!("executing task: {task_name:?}");
                         (task_name, task)
                     }
                 }
             }
             None => {
-                info!("Available tasks:");
+                info!("available tasks:");
                 for task_name in self.tasks.iter().map(|item| item.0.as_str()) {
                     println!("{task_name}");
                 }
@@ -55,7 +55,7 @@ impl TaskRouter {
         };
 
         if let Err(err) = task(args) {
-            error!("Task: {task_name:?} returned error: {err:?}");
+            error!("task: {task_name:?} returned error: {err:?}");
             exit(1);
         }
     }

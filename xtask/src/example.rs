@@ -16,8 +16,28 @@ pub fn c(args: Args) -> Result<()> {
 }
 
 pub fn run_echo(args: Args) -> Result<()> {
-    let args = args.collect::<Vec<_>>();
-    run("echo", args.iter().map(|s| s.as_str()).collect::<Vec<_>>())?;
+    let args = ["echo".to_string()].into_iter().chain(args);
+    cmd(args).run()?;
+    Ok(())
+}
+
+pub fn run_with_env(_args: Args) -> Result<()> {
+    cmd(["echo", "ok"]).env("AAA", "aaa").run()?;
+    Ok(())
+}
+
+pub fn run_with_chdir(_args: Args) -> Result<()> {
+    cmd(["ls"]).current_dir("xtask").run()?;
+    Ok(())
+}
+
+pub fn run_unknown_command(_args: Args) -> Result<()> {
+    cmd(["a"]).run()?;
+    Ok(())
+}
+
+pub fn run_fail_command(_args: Args) -> Result<()> {
+    cmd(["sh", "-c", "exit 1"]).run()?;
     Ok(())
 }
 
