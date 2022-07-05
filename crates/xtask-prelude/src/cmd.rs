@@ -58,7 +58,7 @@ impl Cmd {
         self
     }
 
-    fn log(&self, label: &str) {
+    fn log(&self) {
         let program = self.inner.get_program();
         let args = self.inner.get_args().collect::<Vec<_>>();
 
@@ -73,11 +73,11 @@ impl Cmd {
             _ => format!(" envs={:?}", envs.collect::<Vec<_>>()),
         };
 
-        info!("{label}: program={program:?} args={args:?}{current_dir_phrase}{envs_phrase}",);
+        info!("program={program:?} args={args:?}{current_dir_phrase}{envs_phrase}",);
     }
 
     pub fn run(mut self) -> Result<()> {
-        self.log("run");
+        self.log();
         let status = self.inner.status()?;
         match status.success() {
             true => Ok(()),
@@ -86,17 +86,17 @@ impl Cmd {
     }
 
     pub fn status(mut self) -> Result<ExitStatus> {
-        self.log("status");
+        self.log();
         Ok(self.inner.status()?)
     }
 
     pub fn output(mut self) -> Result<Output> {
-        self.log("output");
+        self.log();
         Ok(self.inner.output()?)
     }
 
     pub fn spawn(mut self) -> Result<Child> {
-        self.log("spawn");
+        self.log();
         Ok(self.inner.spawn()?)
     }
 }
