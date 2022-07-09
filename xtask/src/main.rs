@@ -11,6 +11,7 @@ fn main() {
         .insert("example-b", example::b)
         .insert("example-c", example::c)
         .insert("example-run-echo", example::run_echo)
+        .insert("example-run-echo-quiet", example::run_echo_quiet)
         .insert("example-run-with-env", example::run_with_env)
         .insert("example-run-with-chdir", example::run_with_chdir)
         .insert("example-run-unknown-command", example::run_unknown_command)

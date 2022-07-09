@@ -21,6 +21,12 @@ pub fn run_echo(args: Args) -> Result<()> {
     Ok(())
 }
 
+pub fn run_echo_quiet(args: Args) -> Result<()> {
+    let args = ["echo".to_string()].into_iter().chain(args);
+    cmd(args).quiet().run()?;
+    Ok(())
+}
+
 pub fn run_with_env(_args: Args) -> Result<()> {
     cmd(["echo", "ok"]).env("AAA", "aaa").run()?;
     Ok(())

@@ -30,11 +30,15 @@ where
 
     let mut inner = Command::new(program);
     inner.args(args);
-    Cmd { inner }
+    Cmd {
+        inner,
+        quiet: false,
+    }
 }
 
 pub struct Cmd {
     inner: std::process::Command,
+    quiet: bool,
 }
 
 impl Cmd {
@@ -58,7 +62,16 @@ impl Cmd {
         self
     }
 
+    pub fn quiet(mut self) -> Self {
+        self.quiet = true;
+        self
+    }
+
     fn log(&self) {
+        if self.quiet {
+            return;
+        }
+
         let program = self.inner.get_program();
         let args = self.inner.get_args().collect::<Vec<_>>();
 
