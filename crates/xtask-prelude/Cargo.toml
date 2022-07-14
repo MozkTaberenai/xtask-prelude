@@ -2,6 +2,7 @@
 name = "xtask-prelude"
 version = "0.2.2"
 edition = "2021"
+authors = ["Mozk Taberenai <mozk@me.com>"]
 
 [dependencies]
 anyhow = "1.0"
